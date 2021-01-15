@@ -46,5 +46,22 @@ describe('Testing coins', () => {
       expect(res.body.coins.foos['10']).toEqual(0);
       expect(res.body.coins.foos['50']).toEqual(0);
     });
+
+    it('it returns the minimum number of coins for a total', async () => {
+      const res = await request(app.getServer()).get(`${coinsRoute.path}?total=23.20`);
+      expect(res.status).toBe(200);
+      expect(res.body.coins.bars).toBeInstanceOf(Object);
+      expect(res.body.coins.foos).toBeInstanceOf(Object);
+
+      // Check correct values are present
+      expect(res.body.coins.bars['2']).toEqual(11);
+      expect(res.body.coins.foos['20']).toEqual(1);
+      expect(res.body.coins.bars['1']).toEqual(1);
+      // Check 0 values are returned for unused denominations
+      expect(res.body.coins.foos['1']).toEqual(0);
+      expect(res.body.coins.foos['5']).toEqual(0);
+      expect(res.body.coins.foos['10']).toEqual(0);
+      expect(res.body.coins.foos['50']).toEqual(0);
+    });
   });
 });
