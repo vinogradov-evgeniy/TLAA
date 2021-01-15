@@ -12,25 +12,25 @@ describe('Testing People Controller', () => {
     const peopleRoute = new PeopleRoute();
     const app = new App([peopleRoute]);
 
-    it('it should greet Marvin', async () => {
+    it('it should greet Tom', async () => {
       const res = await request(app.getServer())
         .post(`${peopleRoute.path}`)
         .send({
           job: 'doctor',
-          name: 'Marvin',
+          name: 'Tom',
           patients: ['Bob', 'Mohammed', 'Claire'],
         });
       expect(res.status).toEqual(200);
       expect(res.body).toBeInstanceOf(Object);
-      expect(res.body.greeting).toEqual('Hi Marvin!');
+      expect(res.body.greeting).toEqual('Hi Tom!');
     });
 
-    it("it should suggest treatments for Marvin's patients", async () => {
+    it("it should suggest treatments for Tom's patients", async () => {
       const res = await request(app.getServer())
         .post(`${peopleRoute.path}`)
         .send({
           job: 'doctor',
-          name: 'Marvin',
+          name: 'Tom',
           patients: ['Bob', 'Mohammed', 'Claire'],
         });
       expect(res.status).toEqual(200);
